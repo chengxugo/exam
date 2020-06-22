@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chengxugo.mapper.TK.ChoiceMapper">
+    <select id="AllChoice" resultType="Choice">
+        select *from tk_choice
+    </select>
+
+    <select id="findChoice" parameterType="Long" resultType="Choice">
+        select  * from tk_choice  where id = #{id}
+    </select>
+
+    <delete id="DeleteChoice" >
+        delete  from  tk_choice WHERE  id = #{id}
+    </delete>
+
+    <insert id="CreateChoice" parameterType="Choice">
+        insert into tk_choice(content, Aoption, Boption, Coption, Doption, answer, analysis, chapter, chaptertwo,difficulty)
+        value (#{content}, #{aoption}, #{boption}, #{coption}, #{doption},#{answer},#{analysis},#{chapter},#{chaptertwo},#{difficulty})
+    </insert>
+
+    <!-- 更新的方法 -->
+    <update id="UpdateChoice" parameterType="Choice">
+        update tk_choice set
+            id = #{id},
+            content= #{content},
+            aoption =#{aoption},
+            boption = #{boption},
+            coption= #{coption},
+            doption= #{doption},
+            answer = #{answer},
+            analysis =#{analysis},
+            chapter =#{chapter},
+            chaptertwo =#{chaptertwo},
+            difficulty = #{difficulty}
+        where id = #{id}
+    </update>
+    <!--批量删除选择题-->
+    <delete id="deleteManyChoice" parameterType="String">
+         delete from tk_choice where id in
+        (${_parameter})
+    </delete>
+
+</mapper>
